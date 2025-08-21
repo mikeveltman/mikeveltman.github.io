@@ -5,9 +5,7 @@ id: home
 permalink: /
 ---
 
-# Welcome my attic
-
-<strong>Recently updated notes</strong>
+<strong>Recently updated places</strong>
 
 <ul>
   {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
@@ -17,9 +15,3 @@ permalink: /
     </li>
   {% endfor %}
 </ul>
-
-<style>
-  .wrapper {
-    max-width: 46em;
-  }
-</style>

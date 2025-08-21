@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="{{ site.baseurl }}/styles.css">
+
+  <title>
+    {{ site.title }}
+  </title>
+
+
   {% include head.html %}
   <body>
-    <nav>{% include nav.html %}</nav>
-    <div class="wrapper">
       <main>{{ content }}</main>
-      <footer>{% include footer.html %}</footer>
-    </div>
-
-    {% include link-previews.html wrapperQuerySelector="content" %}
   </body>
+  {% include footer.html %}
 </html>
