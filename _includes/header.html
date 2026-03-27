@@ -1,7 +1,10 @@
-<head>
-  <header>
-    <h1>
-      <a href="{{ "/" | relative_url }}">Mike's Attic</a>
-    </h1>
-  </header>
-</head>
+<header class="site-header">
+  {% unless page.url == "/" %}
+  <a href="{{ '/' | relative_url }}" class="site-title">{{ site.title }}</a>
+  {% endunless %}
+  <nav>
+    <a href="{{ '/about' | relative_url }}">About</a>
+    <a href="{{ '/projects' | relative_url }}">Projects</a>
+    <a href="{{ '/blog' | relative_url }}">Blog</a>
+  </nav>
+</header>

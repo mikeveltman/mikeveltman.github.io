@@ -1,0 +1,379 @@
+$bg:     #F8F4EE;
+$text:   #1C1C1C;
+$accent: #C4622D;
+$muted:  #8B7355;
+$border: #E4DDD3;
+$white:  #FFFFFF;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: $bg;
+  color: $text;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h3 { font-size: 1.25rem; }
+
+p { margin-bottom: 1em; }
+p:last-child { margin-bottom: 0; }
+
+a {
+  color: $accent;
+  text-decoration: none;
+  &:hover { text-decoration: underline; }
+}
+
+img { max-width: 100%; display: block; }
+
+// ── Header ──────────────────────────────────────────
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2.5rem;
+  border-bottom: 1px solid $border;
+
+  .site-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    font-style: italic;
+    color: $text;
+    letter-spacing: -0.01em;
+    &:hover { color: $accent; text-decoration: none; }
+  }
+
+  nav {
+    display: flex;
+    gap: 2rem;
+
+    a {
+      color: $text;
+      font-family: 'Fraunces', serif;
+      font-size: 0.9rem;
+      font-style: italic;
+      font-weight: 400;
+      &:hover { color: $accent; text-decoration: none; }
+    }
+  }
+}
+
+// ── Footer ──────────────────────────────────────────
+
+.site-footer {
+  padding: 2rem 2.5rem;
+  border-top: 1px solid $border;
+  font-size: 0.8rem;
+  color: $muted;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+
+  a {
+    color: $muted;
+    &:hover { color: $accent; text-decoration: none; }
+  }
+}
+
+main { flex: 1; }
+
+// ── Header: homepage has no site-title, so push nav to the right ────
+
+.home .site-header {
+  justify-content: flex-end;
+}
+
+// ── Buttons ─────────────────────────────────────────
+
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.6rem;
+  background: $accent;
+  color: $white !important;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 3px;
+  transition: background 0.15s;
+  &:hover { background: #a8501f; text-decoration: none !important; }
+}
+
+.btn svg {
+  vertical-align: middle;
+  margin-right: 0.4em;
+  margin-top: -2px;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid $border;
+  color: $text !important;
+  &:hover { border-color: $text; text-decoration: none !important; }
+}
+
+// ── Hero (homepage) ─────────────────────────────────
+
+.hero {
+  padding: 7rem 2.5rem 5rem;
+  max-width: 940px;
+  margin: 0 auto;
+  width: 100%;
+
+  h1 {
+    margin-bottom: 1.75rem;
+    font-style: italic;
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: $muted;
+    max-width: 520px;
+    margin-bottom: 2.75rem;
+    line-height: 1.6;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+}
+
+// ── Section ─────────────────────────────────────────
+
+.section {
+  padding: 3rem 2.5rem;
+  max-width: 940px;
+  margin: 0 auto;
+  width: 100%;
+
+  & + .section { padding-top: 0; }
+
+  &__label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: $muted;
+    margin-bottom: 1.5rem;
+  }
+}
+
+// ── Post list ───────────────────────────────────────
+
+.post-list {
+  list-style: none;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid $border;
+
+    &:first-child { border-top: 1px solid $border; }
+
+    a {
+      color: $text;
+      font-size: 1rem;
+      &:hover { color: $accent; text-decoration: none; }
+    }
+
+    time {
+      font-size: 0.8rem;
+      color: $muted;
+      white-space: nowrap;
+    }
+  }
+}
+
+.see-all {
+  display: inline-block;
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+// ── Project grid ────────────────────────────────────
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.project-card {
+  display: block;
+  color: $text;
+  background: $white;
+  border: 1px solid $border;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.07);
+    text-decoration: none;
+  }
+
+  .card-cover {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    background: $border;
+  }
+
+  .card-body {
+    padding: 1rem 1.25rem 1.25rem;
+
+    h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+    p { font-size: 0.85rem; color: $muted; margin: 0; }
+  }
+}
+
+// ── Page layout ─────────────────────────────────────
+
+.page-wrap {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 4rem 2.5rem;
+
+  h1 { margin-bottom: 2rem; }
+  h2 { margin: 2em 0 0.6em; }
+  h3 { margin: 1.5em 0 0.4em; }
+  ul, ol { margin: 0.75em 0 1em 1.5em; }
+  li + li { margin-top: 0.35em; }
+
+  a:not(.btn):not(.btn-outline) {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .external-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2.5rem;
+  }
+}
+
+// ── Blog post ────────────────────────────────────────
+
+.post {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 4rem 2.5rem;
+
+  &-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid $border;
+
+    h1 { margin-bottom: 0.6rem; font-style: italic; }
+    time { font-size: 0.875rem; color: $muted; }
+  }
+
+  &-content {
+    h2 { margin: 2em 0 0.6em; }
+    h3 { margin: 1.5em 0 0.4em; }
+    ul, ol { margin: 0.75em 0 1em 1.5em; }
+    li + li { margin-top: 0.35em; }
+
+    img { border-radius: 6px; margin: 1.75em 0; }
+
+    blockquote {
+      border-left: 3px solid $accent;
+      padding: 0.25rem 0 0.25rem 1.25rem;
+      margin: 1.5em 0;
+      color: $muted;
+      font-style: italic;
+    }
+
+    a { text-decoration: underline; text-underline-offset: 3px; }
+  }
+}
+
+// ── Project page ─────────────────────────────────────
+
+.project-page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 4rem 2.5rem;
+
+  &-header {
+    margin-bottom: 2.5rem;
+    h1 { margin-bottom: 0.5rem; font-style: italic; }
+    time { font-size: 0.875rem; color: $muted; }
+  }
+
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem;
+    margin: 2rem 0;
+
+    img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+  }
+
+  .spotify-embed {
+    margin: 2.5rem 0;
+    iframe { width: 100%; border-radius: 12px; }
+  }
+
+  p { margin-bottom: 1em; }
+  a { text-decoration: underline; text-underline-offset: 3px; }
+}
+
+// ── Responsive ──────────────────────────────────────
+
+@media (max-width: 640px) {
+  .site-header {
+    padding: 1rem 1.25rem;
+    nav { gap: 1.25rem; }
+  }
+
+  .site-footer { padding: 1.5rem 1.25rem; }
+
+  .hero { padding: 3.5rem 1.25rem 2.5rem; }
+
+  .section { padding: 2rem 1.25rem; }
+
+  .page-wrap,
+  .post,
+  .project-page { padding: 2.5rem 1.25rem; }
+}

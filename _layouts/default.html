@@ -1,20 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
+<head>
   <meta charset="UTF-8">
-  <meta name="robots" content="noindex, nofollow">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <title>{% if page.title and page.title != site.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;1,9..144,400;1,9..144,700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ site.baseurl }}/styles.css">
-
-  <title>
-    {{ site.title }}
-  </title>
-
-
-  {% include head.html %}
-  <body>
-      <main>{{ content }}</main>
-  </body>
+</head>
+<body{% if page.url == "/" %} class="home"{% endif %}>
+  {% include header.html %}
+  <main>{{ content }}</main>
   {% include footer.html %}
+</body>
 </html>

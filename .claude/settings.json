@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "additionalDirectories": [
+      "/Users/mikeveltman/Repos/mikeveltman.github.io"
+    ],
+    "allow": [
+      "Bash(bundle exec:*)"
+    ]
+  }
+}
