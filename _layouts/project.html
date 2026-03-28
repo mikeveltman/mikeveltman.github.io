@@ -1,10 +1,122 @@
 ---
 layout: default
 ---
+
+{% if page.cover %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+<script>
+(function () {
+  // Mix two values: base towards color by amount (0–1)
+  function mix(c, base, t) { return Math.round(base * (1 - t) + c * t); }
+  // Darken a channel by fraction t
+  function dk(c, t) { return Math.round(c * (1 - t)); }
+
+  var img = new Image();
+  img.crossOrigin = 'Anonymous';
+  img.src = '{{ page.cover }}';
+  img.onload = function () {
+    try {
+      var c = new ColorThief().getColor(img);
+      var r = c[0], g = c[1], b = c[2];
+      var s = document.documentElement.style;
+
+      // Subtle tint on the default background (#EDEAE3 = 237,234,227)
+      s.setProperty('--page-bg',
+        'rgb(' + mix(r,237,.08) + ',' + mix(g,234,.08) + ',' + mix(b,227,.08) + ')');
+
+      // Dominant color as the accent
+      s.setProperty('--page-accent', 'rgb(' + r + ',' + g + ',' + b + ')');
+
+      // 20% darker for button hover states
+      s.setProperty('--page-accent-dark',
+        'rgb(' + dk(r,.20) + ',' + dk(g,.20) + ',' + dk(b,.20) + ')');
+
+      // Light tint for borders and dividers
+      s.setProperty('--page-border',
+        'rgb(' + mix(r,255,.22) + ',' + mix(g,255,.22) + ',' + mix(b,255,.22) + ')');
+    } catch (e) {}
+  };
+}());
+</script>
+{% endif %}
+
 <article class="project-page">
-  <header class="project-page-header">
-    <h1>{{ page.title }}</h1>
-    {% if page.date %}<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %Y" }}</time>{% endif %}
-  </header>
-  {{ content }}
+
+  {% if page.cover %}
+  <div class="project-cover">
+    <img src="{{ page.cover }}" alt="{{ page.title }}">
+  </div>
+  {% endif %}
+
+  <div class="project-body">
+
+    {% if page.spotify %}
+      {% if page.spotify contains '?' %}
+        {% assign spotify_src = page.spotify | append: '&autoplay=1' %}
+      {% else %}
+        {% assign spotify_src = page.spotify | append: '?autoplay=1' %}
+      {% endif %}
+    <div class="project-spotify">
+      <iframe style="border-radius:12px"
+        src="{{ spotify_src }}"
+        width="100%" height="152" frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        allowfullscreen loading="eager"></iframe>
+    </div>
+    {% endif %}
+
+    <header class="project-page-header">
+      <h1>{{ page.title }}</h1>
+      {% if page.date %}
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %Y" }}</time>
+      {% endif %}
+    </header>
+
+    {{ content }}
+
+  </div>
+
 </article>
+
+<!-- Lightbox overlay -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lightbox__close" id="lightbox-close" aria-label="Close">&#x2715;</button>
+  <img class="lightbox__img" id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+(function () {
+  var lb    = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lightbox-img');
+
+  function open(src, alt) {
+    lbImg.src = src;
+    lbImg.alt = alt || '';
+    lb.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    lb.classList.remove('is-open');
+    document.body.style.overflow = '';
+    // Clear src after transition so there's no flash on next open
+    setTimeout(function () { lbImg.src = ''; }, 200);
+  }
+
+  // Wire up all gallery images
+  document.querySelectorAll('.photo-gallery img').forEach(function (img) {
+    img.addEventListener('click', function () { open(this.src, this.alt); });
+  });
+
+  document.getElementById('lightbox-close').addEventListener('click', close);
+
+  // Click on the backdrop (not the image) closes it
+  lb.addEventListener('click', function (e) {
+    if (e.target === lb) close();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && lb.classList.contains('is-open')) close();
+  });
+}());
+</script>

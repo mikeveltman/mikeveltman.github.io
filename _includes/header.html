@@ -1,9 +1,8 @@
 <header class="site-header">
-  {% unless page.url == "/" %}
   <a href="{{ '/' | relative_url }}" class="site-title">{{ site.title }}</a>
-  {% endunless %}
   <nav>
     <a href="{{ '/about' | relative_url }}">About</a>
+    <a href="{{ '/now' | relative_url }}">Now</a>
     <a href="{{ '/projects' | relative_url }}">Projects</a>
     <a href="{{ '/blog' | relative_url }}">Blog</a>
   </nav>

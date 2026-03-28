@@ -1,7 +1,4 @@
-// ── Palette ─────────────────────────────────────────
-// Background: old newsprint/photo paper — less sweet than before
-// Accent: deep bottle green — Japanese racing, military, Radiohead cover art
-
+// ── SCSS variables (compile-time defaults) ───────────
 $bg:     #EDEAE3;
 $text:   #111010;
 $accent: #1C3F2E;
@@ -9,21 +6,27 @@ $muted:  #787270;
 $border: #D5D0C8;
 $white:  #FFFFFF;
 
+// ── CSS custom properties ────────────────────────────
+// These are the runtime theme values. On regular pages they equal
+// the SCSS defaults above. On project pages, ColorThief.js overrides
+// --page-bg, --page-accent, --page-accent-dark and --page-border
+// based on the cover photo — theming the entire site.
+
+:root {
+  --page-bg:          #{$bg};
+  --page-accent:      #{$accent};
+  --page-accent-dark: #142d20;
+  --page-border:      #{$border};
+}
+
 // ── Reset ────────────────────────────────────────────
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-html {
-  font-size: 16px;
-  -webkit-text-size-adjust: 100%;
-}
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
 
 body {
-  background: $bg;
+  background: var(--page-bg);
   color: $text;
   font-family: 'DM Sans', sans-serif;
   font-size: 1rem;
@@ -31,11 +34,11 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  // Smooth color transition as ColorThief result comes in
+  transition: background 0.4s ease;
 }
 
 // ── Typography ───────────────────────────────────────
-// Fraunces is the editorial voice — headings, nav, labels, post titles.
-// DM Sans handles readable body text.
 
 h1, h2, h3, h4 {
   font-family: 'Fraunces', serif;
@@ -52,7 +55,7 @@ p { margin-bottom: 1em; }
 p:last-child { margin-bottom: 0; }
 
 a {
-  color: $accent;
+  color: var(--page-accent);
   text-decoration: none;
   &:hover { text-decoration: underline; }
 }
@@ -66,9 +69,9 @@ img { max-width: 100%; display: block; }
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem 2.5rem;
-  border-bottom: 1px solid $border;
+  border-bottom: 1px solid var(--page-border);
+  transition: border-color 0.4s ease;
 
-  // Site title = home button on inner pages, hidden on homepage
   .site-title {
     font-family: 'Fraunces', serif;
     font-size: 1.05rem;
@@ -76,7 +79,7 @@ img { max-width: 100%; display: block; }
     font-style: italic;
     color: $text;
     letter-spacing: -0.01em;
-    &:hover { color: $accent; text-decoration: none; }
+    &:hover { color: var(--page-accent); text-decoration: none; }
   }
 
   nav {
@@ -89,24 +92,25 @@ img { max-width: 100%; display: block; }
       font-size: 0.9rem;
       font-style: italic;
       font-weight: 400;
-      &:hover { color: $accent; text-decoration: none; }
+      &:hover { color: var(--page-accent); text-decoration: none; }
     }
   }
 }
 
-// On the homepage there's no site-title, so push nav to the right
-.home .site-header {
-  justify-content: flex-end;
+.home .site-header .site-title {
+  visibility: hidden;
+  pointer-events: none;
 }
 
 // ── Footer ───────────────────────────────────────────
 
 .site-footer {
   padding: 2rem 2.5rem;
-  border-top: 1px solid $border;
+  border-top: 1px solid var(--page-border);
   font-size: 0.8rem;
   color: $muted;
   margin-top: auto;
+  transition: border-color 0.4s ease;
 }
 
 main { flex: 1; }
@@ -118,23 +122,23 @@ main { flex: 1; }
   align-items: center;
   gap: 0.45em;
   padding: 0.65rem 1.5rem;
-  background: $accent;
+  background: var(--page-accent);
   color: $white !important;
   font-size: 0.875rem;
   font-weight: 500;
   border-radius: 2px;
   transition: background 0.15s;
-  &:hover { background: #142d20; text-decoration: none !important; }
+  &:hover { background: var(--page-accent-dark); text-decoration: none !important; }
 }
 
 .btn-outline {
   background: transparent;
-  border: 1.5px solid $border;
+  border: 1.5px solid var(--page-border);
   color: $text !important;
   &:hover { border-color: $text; text-decoration: none !important; }
 }
 
-// ── Hero (homepage) ──────────────────────────────────
+// ── Hero ─────────────────────────────────────────────
 
 .hero {
   padding: 7rem 2.5rem 5rem;
@@ -142,10 +146,7 @@ main { flex: 1; }
   margin: 0 auto;
   width: 100%;
 
-  h1 {
-    margin-bottom: 1.75rem;
-    font-style: italic;
-  }
+  h1 { margin-bottom: 1.75rem; font-style: italic; }
 
   .hero-sub {
     font-size: 1.1rem;
@@ -155,24 +156,17 @@ main { flex: 1; }
     line-height: 1.6;
   }
 
-  .hero-links {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
+  .hero-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 }
 
 // ── Section ──────────────────────────────────────────
-// Homepage sections separated by a top border — magazine-style.
-// The label uses Fraunces italic with a green left bar,
-// like a department header in a print magazine.
 
 .section {
   padding: 2.5rem 2.5rem;
   max-width: 940px;
   margin: 0 auto;
   width: 100%;
-  border-top: 1px solid $border;
+  border-top: 1px solid var(--page-border);
 
   &__label {
     font-family: 'Fraunces', serif;
@@ -182,7 +176,8 @@ main { flex: 1; }
     color: $muted;
     margin-bottom: 1.75rem;
     padding-left: 0.75rem;
-    border-left: 2px solid $accent;
+    border-left: 2px solid var(--page-accent);
+    transition: border-color 0.4s ease;
   }
 }
 
@@ -197,7 +192,7 @@ main { flex: 1; }
     align-items: baseline;
     gap: 1rem;
     padding: 1rem 0;
-    border-bottom: 1px solid $border;
+    border-bottom: 1px solid var(--page-border);
 
     a {
       color: $text;
@@ -206,14 +201,10 @@ main { flex: 1; }
       font-weight: 700;
       font-size: 1rem;
       line-height: 1.2;
-      &:hover { color: $accent; text-decoration: none; }
+      &:hover { color: var(--page-accent); text-decoration: none; }
     }
 
-    time {
-      font-size: 0.78rem;
-      color: $muted;
-      white-space: nowrap;
-    }
+    time { font-size: 0.78rem; color: $muted; white-space: nowrap; }
   }
 }
 
@@ -223,7 +214,7 @@ main { flex: 1; }
   font-family: 'Fraunces', serif;
   font-style: italic;
   font-size: 0.9rem;
-  color: $accent;
+  color: var(--page-accent);
   &:hover { text-decoration: underline; }
 }
 
@@ -239,7 +230,7 @@ main { flex: 1; }
   display: block;
   color: $text;
   background: $white;
-  border: 1px solid $border;
+  border: 1px solid var(--page-border);
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
 
@@ -249,12 +240,11 @@ main { flex: 1; }
     text-decoration: none;
   }
 
-  // 3:2 ratio — more photographic/cinematic than 4:3
   .card-cover {
     width: 100%;
     aspect-ratio: 3 / 2;
     object-fit: cover;
-    background: $border;
+    background: var(--page-border);
     display: block;
   }
 
@@ -309,7 +299,7 @@ main { flex: 1; }
   &-header {
     margin-bottom: 3rem;
     padding-bottom: 2rem;
-    border-bottom: 1px solid $border;
+    border-bottom: 1px solid var(--page-border);
 
     h1 { margin-bottom: 0.6rem; font-style: italic; }
 
@@ -326,11 +316,10 @@ main { flex: 1; }
     h3 { margin: 1.5em 0 0.4em; }
     ul, ol { margin: 0.75em 0 1em 1.5em; }
     li + li { margin-top: 0.35em; }
-
     img { margin: 1.75em 0; }
 
     blockquote {
-      border-left: 2px solid $accent;
+      border-left: 2px solid var(--page-accent);
       padding: 0.25rem 0 0.25rem 1.25rem;
       margin: 1.5em 0;
       color: $muted;
@@ -342,17 +331,53 @@ main { flex: 1; }
   }
 }
 
+// ── Drop cap ─────────────────────────────────────────
+
+.post-content > p:first-of-type::first-letter {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 3.6em;
+  line-height: 0.82;
+  float: left;
+  margin: 0.04em 0.08em 0 0;
+  color: $text;
+}
+
 // ── Project page ──────────────────────────────────────
 
 .project-page {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 4rem 2.5rem;
+
+  .project-cover {
+    width: 100%;
+    height: 60vh;
+    min-height: 300px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  .project-body {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 2.5rem 5rem;
+  }
+
+  // Spotify embed pinned to the top, before the title
+  .project-spotify {
+    margin-bottom: 2rem;
+    iframe { width: 100%; border-radius: 12px; }
+  }
 
   &-header {
     margin-bottom: 2.5rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid $border;
+    padding-bottom: 1.75rem;
+    border-bottom: 2px solid var(--page-accent);
+    transition: border-color 0.4s ease;
 
     h1 { margin-bottom: 0.5rem; font-style: italic; }
 
@@ -364,16 +389,19 @@ main { flex: 1; }
     }
   }
 
-  .photo-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 0.5rem;
-    margin: 2rem 0;
+  // Masonry photo gallery — natural aspect ratios, no forced crop
+  .photo-gallery {
+    columns: 2;
+    column-gap: 0.4rem;
+    margin: 2.5rem 0;
 
     img {
       width: 100%;
-      aspect-ratio: 3 / 2;
-      object-fit: cover;
+      height: auto;
+      display: block;
+      margin-bottom: 0.4rem;
+      break-inside: avoid;
+      cursor: zoom-in;
     }
   }
 
@@ -386,21 +414,150 @@ main { flex: 1; }
   a { text-decoration: underline; text-underline-offset: 3px; }
 }
 
+// ── Lightbox ──────────────────────────────────────────
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.93);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+
+  &.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &__img {
+    max-width: 92vw;
+    max-height: 92vh;
+    object-fit: contain;
+    display: block;
+  }
+
+  &__close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0.25rem;
+    &:hover { color: $white; }
+  }
+}
+
+// ── Now page ─────────────────────────────────────────
+
+.now-page {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 4rem 2.5rem;
+
+  h1 { font-style: italic; margin-bottom: 0.5rem; }
+
+  .now-updated {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: $muted;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--page-border);
+  }
+
+  .now-item {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 0.5rem 1.5rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--page-border);
+    align-items: baseline;
+
+    &:first-of-type { border-top: 1px solid var(--page-border); }
+
+    .now-label {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 0.8rem;
+      color: $muted;
+      padding-left: 0.75rem;
+      border-left: 2px solid var(--page-accent);
+    }
+
+    .now-value {
+      font-size: 1rem;
+      color: $text;
+      a { text-decoration: underline; text-underline-offset: 3px; }
+    }
+  }
+}
+
+// ── Polaroid display ──────────────────────────────────
+
+.polaroid-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  margin: 2.5rem 0;
+  align-items: flex-start;
+}
+
+.polaroid {
+  background: $white;
+  padding: 0.7rem 0.7rem 2.25rem;
+  box-shadow: 2px 4px 16px rgba(0,0,0,0.13);
+  width: calc(33.33% - 1.2rem);
+  transform: rotate(var(--tilt));
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: rotate(0deg) scale(1.02);
+    box-shadow: 4px 8px 24px rgba(0,0,0,0.18);
+    z-index: 1;
+    position: relative;
+  }
+
+  &:nth-child(3n+1) { --tilt: -1.8deg; }
+  &:nth-child(3n+2) { --tilt:  1.3deg; }
+  &:nth-child(3n)   { --tilt: -0.7deg; }
+
+  img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+  }
+
+  figcaption {
+    margin-top: 0.6rem;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: $muted;
+    text-align: center;
+    line-height: 1.3;
+  }
+}
+
 // ── Responsive ───────────────────────────────────────
 
 @media (max-width: 640px) {
-  .site-header {
-    padding: 1rem 1.25rem;
-    nav { gap: 1.25rem; }
-  }
-
+  .site-header { padding: 1rem 1.25rem; nav { gap: 1.25rem; } }
   .site-footer { padding: 1.5rem 1.25rem; }
-
   .hero { padding: 3.5rem 1.25rem 2.5rem; }
-
   .section { padding: 2rem 1.25rem; }
-
-  .page-wrap,
-  .post,
-  .project-page { padding: 2.5rem 1.25rem; }
+  .page-wrap, .post { padding: 2.5rem 1.25rem; }
+  .project-page .project-body { padding: 2rem 1.25rem 3rem; }
+  .project-page .project-cover { height: 40vh; }
+  .project-page .photo-gallery { columns: 1; }
+  .polaroid { width: calc(50% - 0.875rem); }
 }
