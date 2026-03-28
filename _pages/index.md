@@ -2,7 +2,7 @@
 layout: default
 title: Home
 permalink: /
-hero_image: /assets/czech-republic/62A66506-A200-4235-8530-C810AEA94F81_1_105_c.jpeg
+# hero_image: /assets/czech-republic/62A66506-A200-4235-8530-C810AEA94F81_1_105_c.jpeg
 ---
 
 <section class="hero{% if page.hero_image %} hero--split{% endif %}">
