@@ -1,13 +1,13 @@
 ---
-title: Pantropica
+title: Plants
 date: 2025-12-22
-description: Visit to Pantropica.
+description:
 published: true
+category: photography
+straight_from_camera: true
 cover: /assets/pantropica/green.jpeg
 spotify: https://open.spotify.com/embed/track/2bBrirDuZf2mDbE6P7PCwh?utm_source=generator
 ---
-
-Visit to Pantropica.
 
 <div class="photo-gallery">
   <img src="/assets/pantropica/orange.jpeg" alt="">

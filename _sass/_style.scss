@@ -1,23 +1,54 @@
-// ── SCSS variables (compile-time defaults) ───────────
-$bg:     #EDEAE3;
-$text:   #111010;
-$accent: #1C3F2E;
-$muted:  #787270;
-$border: #D5D0C8;
-$white:  #FFFFFF;
+// ── Compile-time constants ───────────────────────────
+// Only used for values that must always be white/fixed (overlay text, etc.)
+$white: #FFFFFF;
 
 // ── CSS custom properties ────────────────────────────
-// These are the runtime theme values. On regular pages they equal
-// the SCSS defaults above. On project pages, ColorThief.js overrides
-// --page-bg, --page-accent, --page-accent-dark and --page-border
-// based on the cover photo — theming the entire site.
+// Light theme (default). Dark theme overrides follow below.
+// --page-bg, --page-accent, --page-accent-dark, --page-border are
+// additionally overridden by ColorThief.js on project pages.
 
 :root {
-  --page-bg:          #{$bg};
-  --page-accent:      #{$accent};
-  --page-accent-dark: #142d20;
-  --page-border:      #{$border};
+  --bg:            #EDEAE3;
+  --text:          #111010;
+  --muted:         #787270;
+  --accent:        #1C3F2E;
+  --accent-dark:   #142d20;
+  --border:        #D5D0C8;
+  --surface:       rgba(255, 255, 255, 0.7);
+  --glass-bg:      rgba(237, 234, 227, 0.65);
+  --glass-border:  rgba(255, 255, 255, 0.45);
+  --widget-bg:     rgba(255, 255, 255, 0.18);
+  --widget-border: rgba(255, 255, 255, 0.35);
+
+  // Page-level (ColorThief overrides these on project pages)
+  --page-bg:          var(--bg);
+  --page-accent:      var(--accent);
+  --page-accent-dark: var(--accent-dark);
+  --page-border:      var(--border);
 }
+
+// ── Dark theme ────────────────────────────────────────
+
+@mixin dark-theme {
+  --bg:            #1A1917;
+  --text:          #E8E4DC;
+  --muted:         #9B9793;
+  --accent:        #5B9E76;
+  --accent-dark:   #3D7A56;
+  --border:        #302E2B;
+  --surface:       rgba(40, 38, 35, 0.7);
+  --glass-bg:      rgba(22, 21, 19, 0.75);
+  --glass-border:  rgba(255, 255, 255, 0.07);
+  --widget-bg:     rgba(255, 255, 255, 0.06);
+  --widget-border: rgba(255, 255, 255, 0.1);
+}
+
+// System preference (unless manually overridden)
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { @include dark-theme; }
+}
+// Manual override
+:root[data-theme="dark"] { @include dark-theme; }
 
 // ── Reset ────────────────────────────────────────────
 
@@ -27,15 +58,14 @@ html { font-size: 16px; -webkit-text-size-adjust: 100%; }
 
 body {
   background: var(--page-bg);
-  color: $text;
+  color: var(--text);
   font-family: 'DM Sans', sans-serif;
   font-size: 1rem;
   line-height: 1.65;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  // Smooth color transition as ColorThief result comes in
-  transition: background 0.4s ease;
+  transition: background 0.4s ease, color 0.3s ease;
 }
 
 // ── Typography ───────────────────────────────────────
@@ -69,17 +99,29 @@ img { max-width: 100%; display: block; }
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem 2.5rem;
-  border-bottom: 1px solid var(--page-border);
-  transition: border-color 0.4s ease;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  background: var(--glass-bg);
+  border-bottom: 1px solid var(--glass-border);
+  transition: background 0.4s ease, border-color 0.4s ease;
 
   .site-title {
     font-family: 'Fraunces', serif;
-    font-size: 1.05rem;
+    font-size: 1.3rem;
     font-weight: 700;
     font-style: italic;
-    color: $text;
+    color: var(--text);
     letter-spacing: -0.01em;
     &:hover { color: var(--page-accent); text-decoration: none; }
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
   }
 
   nav {
@@ -87,7 +129,7 @@ img { max-width: 100%; display: block; }
     gap: 2rem;
 
     a {
-      color: $text;
+      color: var(--text);
       font-family: 'Fraunces', serif;
       font-size: 0.9rem;
       font-style: italic;
@@ -95,6 +137,38 @@ img { max-width: 100%; display: block; }
       &:hover { color: var(--page-accent); text-decoration: none; }
     }
   }
+}
+
+// ── Theme toggle ──────────────────────────────────────
+
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  transition: color 0.15s;
+
+  &:hover { color: var(--page-accent); }
+
+  // Default: show moon (light mode → click to go dark)
+  .icon-sun  { display: none; }
+  .icon-moon { display: block; }
+}
+
+// Show sun when dark (click to go back to light)
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle {
+    .icon-sun  { display: block; }
+    .icon-moon { display: none; }
+  }
+}
+[data-theme="dark"] .theme-toggle {
+  .icon-sun  { display: block; }
+  .icon-moon { display: none; }
 }
 
 .home .site-header .site-title {
@@ -108,7 +182,7 @@ img { max-width: 100%; display: block; }
   padding: 2rem 2.5rem;
   border-top: 1px solid var(--page-border);
   font-size: 0.8rem;
-  color: $muted;
+  color: var(--muted);
   margin-top: auto;
   transition: border-color 0.4s ease;
 }
@@ -126,16 +200,17 @@ main { flex: 1; }
   color: $white !important;
   font-size: 0.875rem;
   font-weight: 500;
-  border-radius: 2px;
+  border-radius: 100px;
   transition: background 0.15s;
   &:hover { background: var(--page-accent-dark); text-decoration: none !important; }
 }
 
 .btn-outline {
   background: transparent;
-  border: 1.5px solid var(--page-border);
-  color: $text !important;
-  &:hover { border-color: $text; text-decoration: none !important; }
+  border: 1.5px solid var(--page-accent);
+  color: var(--page-accent) !important;
+  border-radius: 100px;
+  &:hover { color: $white !important; text-decoration: none !important; }
 }
 
 // ── Hero ─────────────────────────────────────────────
@@ -150,7 +225,7 @@ main { flex: 1; }
 
   .hero-sub {
     font-size: 1.1rem;
-    color: $muted;
+    color: var(--muted);
     max-width: 500px;
     margin-bottom: 2.5rem;
     line-height: 1.6;
@@ -167,18 +242,19 @@ main { flex: 1; }
   margin: 0 auto;
   width: 100%;
   border-top: 1px solid var(--page-border);
+}
 
-  &__label {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 0.85rem;
-    font-weight: 400;
-    color: $muted;
-    margin-bottom: 1.75rem;
-    padding-left: 0.75rem;
-    border-left: 2px solid var(--page-accent);
-    transition: border-color 0.4s ease;
-  }
+// Reusable label — works inside .section and standalone
+.section__label {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--muted);
+  margin-bottom: 1.75rem;
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--page-accent);
+  transition: border-color 0.4s ease, color 0.3s ease;
 }
 
 // ── Post list ────────────────────────────────────────
@@ -195,7 +271,7 @@ main { flex: 1; }
     border-bottom: 1px solid var(--page-border);
 
     a {
-      color: $text;
+      color: var(--text);
       font-family: 'Fraunces', serif;
       font-style: italic;
       font-weight: 700;
@@ -204,7 +280,7 @@ main { flex: 1; }
       &:hover { color: var(--page-accent); text-decoration: none; }
     }
 
-    time { font-size: 0.78rem; color: $muted; white-space: nowrap; }
+    time { font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
   }
 }
 
@@ -226,17 +302,23 @@ main { flex: 1; }
   gap: 1rem;
 }
 
+.project-group {
+  margin-top: 2.5rem;
+  .section__label { margin-bottom: 1.25rem; }
+}
+
 .project-card {
   display: block;
-  color: $text;
-  background: $white;
-  border: 1px solid var(--page-border);
+  position: relative;
+  color: var(--text);
+  background: var(--surface);
+  border-radius: 12px;
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.09);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.15);
     text-decoration: none;
   }
 
@@ -244,22 +326,50 @@ main { flex: 1; }
     width: 100%;
     aspect-ratio: 3 / 2;
     object-fit: cover;
-    background: var(--page-border);
+    background: var(--border);
     display: block;
+    filter: blur(8px);
+    transform: scale(1.08);
+    transition: filter 0.4s ease, transform 0.4s ease;
   }
 
-  .card-body {
-    padding: 0.9rem 1.1rem 1.1rem;
+  &:hover .card-cover {
+    filter: blur(0);
+    transform: scale(1);
+  }
+
+  .card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 3.5rem 1rem 1rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    pointer-events: none;
 
     h3 {
       font-family: 'Fraunces', serif;
       font-style: italic;
       font-size: 1rem;
       font-weight: 700;
-      margin-bottom: 0.25rem;
+      color: $white;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.35);
+      margin-bottom: 0;
     }
+  }
 
-    p { font-size: 0.82rem; color: $muted; margin: 0; }
+  .card-category {
+    display: inline-block;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 100px;
+    padding: 0.18rem 0.6rem;
+    margin-bottom: 0.35rem;
   }
 }
 
@@ -307,7 +417,7 @@ main { flex: 1; }
       font-family: 'Fraunces', serif;
       font-style: italic;
       font-size: 0.875rem;
-      color: $muted;
+      color: var(--muted);
     }
   }
 
@@ -322,7 +432,7 @@ main { flex: 1; }
       border-left: 2px solid var(--page-accent);
       padding: 0.25rem 0 0.25rem 1.25rem;
       margin: 1.5em 0;
-      color: $muted;
+      color: var(--muted);
       font-family: 'Fraunces', serif;
       font-style: italic;
     }
@@ -340,7 +450,7 @@ main { flex: 1; }
   line-height: 0.82;
   float: left;
   margin: 0.04em 0.08em 0 0;
-  color: $text;
+  color: var(--text);
 }
 
 // ── Project page ──────────────────────────────────────
@@ -352,12 +462,33 @@ main { flex: 1; }
     height: 60vh;
     min-height: 300px;
     overflow: hidden;
+    position: relative;
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      filter: blur(12px);
+      transform: scale(1.06);
+    }
+
+    .project-cover-title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 5rem 2.5rem 2.5rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.55));
+
+      h1 {
+        // Smaller than global h1 — this sits on a photo overlay
+        font-size: clamp(1.75rem, 4vw, 3rem);
+        color: $white;
+        font-style: italic;
+        text-shadow: 0 2px 16px rgba(0,0,0,0.45);
+        margin-bottom: 0;
+      }
     }
   }
 
@@ -367,25 +498,69 @@ main { flex: 1; }
     padding: 2.5rem 2.5rem 5rem;
   }
 
-  // Spotify embed pinned to the top, before the title
-  .project-spotify {
-    margin-bottom: 2rem;
-    iframe { width: 100%; border-radius: 12px; }
-  }
-
   &-header {
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.75rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
     border-bottom: 2px solid var(--page-accent);
     transition: border-color 0.4s ease;
-
-    h1 { margin-bottom: 0.5rem; font-style: italic; }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
 
     time {
       font-family: 'Fraunces', serif;
       font-style: italic;
       font-size: 0.875rem;
-      color: $muted;
+      color: var(--muted);
+    }
+  }
+
+  // Straight-from-camera badge
+  .sooc-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    font-size: 0.72rem;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--muted);
+    border: 1px solid var(--page-border);
+    border-radius: 100px;
+    padding: 0.22rem 0.75rem;
+    letter-spacing: 0.02em;
+    transition: border-color 0.4s ease, color 0.3s ease;
+
+    &::before {
+      content: '◎';
+      font-size: 0.65rem;
+    }
+  }
+
+  // Music widget — frosted glass wrapper around Spotify embed
+  .music-widget {
+    margin-bottom: 2rem;
+    background: var(--widget-bg);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid var(--widget-border);
+    border-radius: 16px;
+    padding: 1rem 1rem 0.85rem;
+    transition: background 0.4s ease, border-color 0.4s ease;
+
+    &__label {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+      padding-left: 0.1rem;
+    }
+
+    iframe {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
     }
   }
 
@@ -402,12 +577,8 @@ main { flex: 1; }
       margin-bottom: 0.4rem;
       break-inside: avoid;
       cursor: zoom-in;
+      border-radius: 6px;
     }
-  }
-
-  .spotify-embed {
-    margin: 2.5rem 0;
-    iframe { width: 100%; border-radius: 12px; }
   }
 
   p { margin-bottom: 1em; }
@@ -438,6 +609,7 @@ main { flex: 1; }
     max-height: 92vh;
     object-fit: contain;
     display: block;
+    border-radius: 8px;
   }
 
   &__close {
@@ -455,52 +627,6 @@ main { flex: 1; }
   }
 }
 
-// ── Now page ─────────────────────────────────────────
-
-.now-page {
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 4rem 2.5rem;
-
-  h1 { font-style: italic; margin-bottom: 0.5rem; }
-
-  .now-updated {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 0.85rem;
-    color: $muted;
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--page-border);
-  }
-
-  .now-item {
-    display: grid;
-    grid-template-columns: 7rem 1fr;
-    gap: 0.5rem 1.5rem;
-    padding: 1.1rem 0;
-    border-bottom: 1px solid var(--page-border);
-    align-items: baseline;
-
-    &:first-of-type { border-top: 1px solid var(--page-border); }
-
-    .now-label {
-      font-family: 'Fraunces', serif;
-      font-style: italic;
-      font-size: 0.8rem;
-      color: $muted;
-      padding-left: 0.75rem;
-      border-left: 2px solid var(--page-accent);
-    }
-
-    .now-value {
-      font-size: 1rem;
-      color: $text;
-      a { text-decoration: underline; text-underline-offset: 3px; }
-    }
-  }
-}
-
 // ── Polaroid display ──────────────────────────────────
 
 .polaroid-grid {
@@ -512,10 +638,11 @@ main { flex: 1; }
 }
 
 .polaroid {
-  background: $white;
+  background: $white; // Polaroid frame is intentionally always white
   padding: 0.7rem 0.7rem 2.25rem;
   box-shadow: 2px 4px 16px rgba(0,0,0,0.13);
   width: calc(33.33% - 1.2rem);
+  border-radius: 4px;
   transform: rotate(var(--tilt));
   transition: transform 0.2s, box-shadow 0.2s;
 
@@ -542,22 +669,34 @@ main { flex: 1; }
     font-family: 'Fraunces', serif;
     font-style: italic;
     font-size: 0.82rem;
-    color: $muted;
+    color: var(--muted);
     text-align: center;
     line-height: 1.3;
+  }
+}
+
+// ── Touch devices: disable card hover blur ────────────
+// On phones/tablets there's no hover — photos would be permanently blurred
+@media (hover: none) {
+  .project-card .card-cover {
+    filter: blur(0);
+    transform: scale(1);
   }
 }
 
 // ── Responsive ───────────────────────────────────────
 
 @media (max-width: 640px) {
-  .site-header { padding: 1rem 1.25rem; nav { gap: 1.25rem; } }
+  .site-header { padding: 1rem 1.25rem; }
+  .site-header .header-actions { gap: 1.25rem; }
+  .site-header nav { gap: 1.25rem; }
   .site-footer { padding: 1.5rem 1.25rem; }
   .hero { padding: 3.5rem 1.25rem 2.5rem; }
   .section { padding: 2rem 1.25rem; }
   .page-wrap, .post { padding: 2.5rem 1.25rem; }
   .project-page .project-body { padding: 2rem 1.25rem 3rem; }
   .project-page .project-cover { height: 40vh; }
+  .project-page .project-cover .project-cover-title { padding: 3rem 1.25rem 1.5rem; }
   .project-page .photo-gallery { columns: 1; }
   .polaroid { width: calc(50% - 0.875rem); }
 }

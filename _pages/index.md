@@ -7,12 +7,9 @@ permalink: /
 <section class="hero">
   <h1>Mike Veltman</h1>
   <p class="hero-sub">
-    <!-- Add a line or two about yourself here. -->
+    I should add a line or two about myself here, but for who?
   </p>
   <div class="hero-links">
-    <a href="https://linkedin.com/in/mike-veltman" class="btn" target="_blank" rel="noopener">
-      {% include icon-linkedin.html %} LinkedIn
-    </a>
     <a href="/about" class="btn-outline btn">About me</a>
   </div>
 </section>
@@ -21,14 +18,14 @@ permalink: /
 <section class="section">
   <p class="section__label">Latest posts</p>
   <ul class="post-list">
-    {% for post in site.posts limit:4 %}
+    {% for post in site.posts limit:3 %}
     <li>
       <a href="{{ post.url }}">{{ post.title }}</a>
       <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %b %Y" }}</time>
     </li>
     {% endfor %}
   </ul>
-  {% if site.posts.size > 4 %}
+  {% if site.posts.size > 3 %}
   <a href="/blog" class="see-all">All posts →</a>
   {% endif %}
 </section>
@@ -45,9 +42,9 @@ permalink: /
       {% else %}
       <div class="card-cover"></div>
       {% endif %}
-      <div class="card-body">
+      <div class="card-overlay">
+        {% if project.category %}<span class="card-category">{{ project.category }}</span>{% endif %}
         <h3>{{ project.title }}</h3>
-        {% if project.description %}<p>{{ project.description }}</p>{% endif %}
       </div>
     </a>
     {% endfor %}

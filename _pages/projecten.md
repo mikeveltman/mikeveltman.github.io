@@ -16,14 +16,14 @@ permalink: /projects
       {% else %}
       <div class="card-cover"></div>
       {% endif %}
-      <div class="card-body">
+      <div class="card-overlay">
+        {% if project.category %}<span class="card-category">{{ project.category }}</span>{% endif %}
         <h3>{{ project.title }}</h3>
-        {% if project.description %}<p>{{ project.description }}</p>{% endif %}
       </div>
     </a>
     {% endfor %}
   </div>
   {% else %}
-  <p style="color: var(--muted, #8B7355); margin-top: 2rem;">Projects coming soon.</p>
+  <p style="color: var(--muted, #8B7355); margin-top: 2rem;">Nothing to see here, yet.</p>
   {% endif %}
 </div>

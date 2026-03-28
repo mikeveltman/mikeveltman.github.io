@@ -17,6 +17,6 @@ permalink: /blog
     {% endfor %}
   </ul>
   {% else %}
-  <p style="color: var(--muted, #8B7355); margin-top: 2rem;">Nothing written yet, but that'll change.</p>
+  <p style="color: var(--muted, #8B7355); margin-top: 2rem;">Nothing written yet.</p>
   {% endif %}
 </div>

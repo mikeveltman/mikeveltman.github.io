@@ -1,4 +1,6 @@
 title: Mike Veltman
+description: Personal site of Mike Veltman — photography, music and more.
+og_image: /assets/pantropica/green.jpeg
 url: https://mikeveltman.nl
 
 include: ['_pages']
@@ -10,6 +12,10 @@ permalink: /blog/:title/
 
 plugins:
   - jekyll-last-modified-at
+
+webrick:
+  headers:
+    Access-Control-Allow-Origin: "*"
 
 sass:
   sass_dir: _sass
