@@ -5,7 +5,6 @@ permalink: /
 ---
 
 <section class="hero">
-  <h1>Mike Veltman</h1>
   <p class="hero-sub">
     I should add a line or two about myself here, but for who?
   </p>

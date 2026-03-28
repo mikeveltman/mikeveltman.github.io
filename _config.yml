@@ -1,31 +1,44 @@
+# ── Site identity ────────────────────────────────────
 title: Mike Veltman
 description: Personal site of Mike Veltman — photography, music and more.
-og_image: /assets/pantropica/green.jpeg
 url: https://mikeveltman.nl
-
-include: ['_pages']
-exclude: ['_notes']
-
 baseurl: ''
+
+# Default Open Graph image for pages without a cover photo
+og_image: /assets/pantropica/green.jpeg
+
+# ── Build ─────────────────────────────────────────────
+include: ['_pages']   # _pages is not a default Jekyll collection dir, so must be listed
+exclude: ['_notes']   # leftover folder from original template, ignored
+
+# Append target="_blank" rel="noopener" to all external links
 open_external_links_in_new_tab: true
+
+# Blog post URLs: /blog/post-title/
 permalink: /blog/:title/
 
 plugins:
   - jekyll-last-modified-at
 
+# ── Local development ─────────────────────────────────
+# Adds CORS headers so ColorThief.js can read images via Canvas locally
 webrick:
   headers:
     Access-Control-Allow-Origin: "*"
 
+# ── Sass ──────────────────────────────────────────────
 sass:
   sass_dir: _sass
   style: :compressed
 
+# ── Collections ───────────────────────────────────────
+# Projects live in _projects/ and get their own pages at /projects/<slug>/
 collections:
   projects:
     output: true
     permalink: /projects/:slug/
 
+# ── Layout defaults ───────────────────────────────────
 defaults:
   - scope:
       path: "**/*"

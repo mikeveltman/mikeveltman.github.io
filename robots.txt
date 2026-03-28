@@ -1,0 +1,4 @@
+# Disallow all crawlers and scrapers.
+# Note: this is advisory — well-behaved bots respect it, malicious ones may not.
+User-agent: *
+Disallow: /
