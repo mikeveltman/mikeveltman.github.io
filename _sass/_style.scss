@@ -95,10 +95,6 @@ img { max-width: 100%; display: block; }
 // ── Header ───────────────────────────────────────────
 
 .site-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem 2.5rem;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -107,7 +103,19 @@ img { max-width: 100%; display: block; }
   background: var(--glass-bg);
   border-bottom: 1px solid var(--glass-border);
   transition: background 0.4s ease, border-color 0.4s ease;
+}
 
+// Inner wrapper constrains header content to the same width as page content
+.header-inner {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 1.5rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-header {
   .site-title {
     font-family: 'Fraunces', serif;
     font-size: 1.3rem;
@@ -683,7 +691,7 @@ main { flex: 1; }
 // ── Responsive ───────────────────────────────────────
 
 @media (max-width: 640px) {
-  .site-header { padding: 1rem 1.25rem; }
+  .header-inner { padding: 1rem 1.25rem; }
   .site-header .header-actions { gap: 1.25rem; }
   .site-header nav { gap: 1.25rem; }
   .site-footer { padding: 1.5rem 1.25rem; }
