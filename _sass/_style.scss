@@ -447,6 +447,27 @@ main { flex: 1; }
     }
   }
 
+  // "Updated dd Mon YYYY" — shown only when updated > created
+  .post-updated {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 0.875rem;
+    color: var(--muted);
+
+    &::before {
+      content: '·';
+      margin-right: 1rem;
+    }
+  }
+
+  // Created + updated dates row
+  .post-dates {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
   &-content {
     h2 { margin: 2em 0 0.6em; font-style: italic; }
     h3 { margin: 1.5em 0 0.4em; }
@@ -541,6 +562,12 @@ main { flex: 1; }
       font-size: 0.875rem;
       color: var(--muted);
     }
+  }
+
+  .project-dates {
+    display: flex;
+    align-items: center;
+    gap: 0;
   }
 
   // Straight-from-camera badge

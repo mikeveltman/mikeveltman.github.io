@@ -16,9 +16,16 @@ layout: default
   <div class="project-body">
 
     <header class="project-page-header">
-      {% if page.date %}
-      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %Y" }}</time>
-      {% endif %}
+      <div class="project-dates">
+        {% if page.date %}
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %Y" }}</time>
+        {% endif %}
+        {% assign created_d = page.date | date: "%Y-%m-%d" %}
+        {% assign updated_d = page.last_modified_at | date: "%Y-%m-%d" %}
+        {% if updated_d and updated_d != created_d %}
+        <span class="post-updated">Updated {{ page.last_modified_at | date: "%B %Y" }}</span>
+        {% endif %}
+      </div>
       {% if page.straight_from_camera %}
       <span class="sooc-badge">Photos are straight from camera</span>
       {% endif %}
