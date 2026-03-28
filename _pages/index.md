@@ -2,21 +2,23 @@
 layout: default
 title: Home
 permalink: /
+hero_image: /assets/czech-republic/62A66506-A200-4235-8530-C810AEA94F81_1_105_c.jpeg
 ---
 
-{% if page.hero_image %}
-<div class="hero-banner">
-  <img src="{{ page.hero_image }}" alt="">
-</div>
-{% endif %}
-
-<section class="hero{% if page.hero_image %} hero--below-banner{% endif %}">
-  <p class="hero-sub">
-    I should add a line or two about myself here, but for who?
-  </p>
-  <div class="hero-links">
-    <a href="/about" class="btn-outline btn">About me</a>
+<section class="hero{% if page.hero_image %} hero--split{% endif %}">
+  <div class="hero__text">
+    <p class="hero-sub">
+      I should add a line or two about myself here, but for who?
+    </p>
+    <div class="hero-links">
+      <a href="/about" class="btn-outline btn">About me</a>
+    </div>
   </div>
+  {% if page.hero_image %}
+  <div class="hero__photo">
+    <img src="{{ page.hero_image }}" alt="">
+  </div>
+  {% endif %}
 </section>
 
 {% if site.posts.size > 0 %}

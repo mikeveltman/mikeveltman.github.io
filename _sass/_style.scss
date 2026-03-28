@@ -255,6 +255,27 @@ main { flex: 1; }
 
   // Reduce top padding when a banner image sits directly above
   &--below-banner { padding-top: 3.5rem; }
+
+  // Split layout: intro text on the left, photo card on the right
+  &--split {
+    padding-top: 5rem;
+    padding-bottom: 4rem;
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  &__photo {
+    img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.13);
+      display: block;
+    }
+  }
 }
 
 // ── Section ──────────────────────────────────────────
@@ -423,6 +444,19 @@ main { flex: 1; }
 
   // Wide variant — listing pages (Projects, Blog) match the 940px homepage width
   &--wide { max-width: 940px; }
+
+  // Optional profile photo — rendered as circular avatar above page content
+  .about-photo {
+    margin-bottom: 2rem;
+
+    img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+  }
 }
 
 // ── Blog post ─────────────────────────────────────────
@@ -529,7 +563,7 @@ main { flex: 1; }
 
       // Inner wrapper aligns title to same max-width as project body
       &__inner {
-        max-width: 860px;
+        max-width: 940px;
         margin: 0 auto;
         padding: 5rem 2.5rem 2.5rem;
       }
@@ -546,7 +580,7 @@ main { flex: 1; }
   }
 
   .project-body {
-    max-width: 860px;
+    max-width: 940px;
     margin: 0 auto;
     padding: 2.5rem 2.5rem 5rem;
   }
@@ -823,6 +857,71 @@ main { flex: 1; }
   margin-top: 2rem;
 }
 
+// ── Reading widget (Goodreads stats) ─────────────────
+
+.reading-widget {
+  margin-top: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  transition: background 0.4s ease, border-color 0.4s ease;
+
+  &__count {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  &__current {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  &__label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--muted);
+    margin-bottom: 0.1rem;
+  }
+
+  &__book {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text);
+    text-decoration: none;
+    &:hover { text-decoration: none; }
+
+    img {
+      width: 36px;
+      height: 54px;
+      object-fit: cover;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    strong {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    em {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-style: italic;
+      font-family: 'Fraunces', serif;
+    }
+  }
+}
+
 // ── Touch devices: disable card hover blur ────────────
 // On phones/tablets there's no hover — photos would be permanently blurred
 @media (hover: none) {
@@ -847,4 +946,7 @@ main { flex: 1; }
   .project-page .project-cover .project-cover-title__inner { padding: 3rem 1.25rem 1.5rem; }
   .project-page .photo-gallery { columns: 1; }
   .polaroid { width: calc(50% - 0.875rem); }
+  .hero--split { grid-template-columns: 1fr; padding-top: 3rem; }
+  .hero--split .hero__photo { order: -1; }
+  .hero--split .hero__photo img { max-width: 160px; aspect-ratio: 1 / 1; }
 }
