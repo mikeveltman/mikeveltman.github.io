@@ -52,36 +52,90 @@ layout: default
   <img class="lightbox__img" id="lightbox-img" src="" alt="">
 </div>
 
+<!-- EXIF tooltip -->
+<div class="exif-tooltip" id="exif-tooltip"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/exifr@7/dist/lite.umd.js"></script>
 <script>
 (function () {
+  // ── Lightbox ──────────────────────────────────────
   var lb    = document.getElementById('lightbox');
   var lbImg = document.getElementById('lightbox-img');
 
-  function open(src, alt) {
+  function openLightbox(src, alt) {
     lbImg.src = src;
     lbImg.alt = alt || '';
     lb.classList.add('is-open');
     document.body.style.overflow = 'hidden';
   }
 
-  function close() {
+  function closeLightbox() {
     lb.classList.remove('is-open');
     document.body.style.overflow = '';
     setTimeout(function () { lbImg.src = ''; }, 200);
   }
 
   document.querySelectorAll('.photo-gallery img').forEach(function (img) {
-    img.addEventListener('click', function () { open(this.src, this.alt); });
+    img.addEventListener('click', function () { openLightbox(this.src, this.alt); });
   });
 
-  document.getElementById('lightbox-close').addEventListener('click', close);
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
 
   lb.addEventListener('click', function (e) {
-    if (e.target === lb) close();
+    if (e.target === lb) closeLightbox();
   });
 
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && lb.classList.contains('is-open')) close();
+    if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLightbox();
+  });
+
+  // ── EXIF tooltip ──────────────────────────────────
+  var tooltip = document.getElementById('exif-tooltip');
+  var exifCache = new Map();
+
+  function formatExif(data) {
+    if (!data) return null;
+    var parts = [];
+    if (data.FNumber)         parts.push('f/' + data.FNumber);
+    if (data.ExposureTime) {
+      var t = data.ExposureTime;
+      parts.push(t < 1 ? '1/' + Math.round(1 / t) + 's' : t + 's');
+    }
+    if (data.ISOSpeedRatings) parts.push('ISO\u00a0' + data.ISOSpeedRatings);
+    if (data.FocalLength)     parts.push(Math.round(data.FocalLength) + 'mm');
+    return parts.length ? parts.join(' · ') : null;
+  }
+
+  function showTooltip(img, text) {
+    tooltip.textContent = text;
+    var r = img.getBoundingClientRect();
+    tooltip.style.left = (r.left + 8) + 'px';
+    tooltip.style.top  = (r.bottom - 36) + 'px';
+    tooltip.classList.add('is-visible');
+  }
+
+  document.querySelectorAll('.photo-gallery img').forEach(function (img) {
+    img.addEventListener('mouseenter', function () {
+      var src = this.src;
+      var el  = this;
+      if (exifCache.has(src)) {
+        var text = exifCache.get(src);
+        if (text) showTooltip(el, text);
+        return;
+      }
+      if (typeof exifr === 'undefined') return;
+      exifr.parse(src, ['FNumber', 'ExposureTime', 'ISOSpeedRatings', 'FocalLength'])
+        .then(function (data) {
+          var text = formatExif(data);
+          exifCache.set(src, text);
+          if (text) showTooltip(el, text);
+        })
+        .catch(function () { exifCache.set(src, null); });
+    });
+
+    img.addEventListener('mouseleave', function () {
+      tooltip.classList.remove('is-visible');
+    });
   });
 }());
 </script>

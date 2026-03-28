@@ -4,7 +4,7 @@ title: Blog
 permalink: /blog
 ---
 
-<div class="page-wrap">
+<div class="page-wrap page-wrap--wide">
   <h1>Blog</h1>
 
   {% if site.posts.size > 0 %}

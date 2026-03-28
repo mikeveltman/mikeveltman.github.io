@@ -4,7 +4,7 @@ title: Projects
 permalink: /projects
 ---
 
-<div class="page-wrap">
+<div class="page-wrap page-wrap--wide">
   <h1>Projects</h1>
 
   {% if site.projects.size > 0 %}

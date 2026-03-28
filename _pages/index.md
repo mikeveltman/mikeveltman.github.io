@@ -1,10 +1,16 @@
 ---
 layout: default
-title: Mike Veltman
+title: Home
 permalink: /
 ---
 
-<section class="hero">
+{% if page.hero_image %}
+<div class="hero-banner">
+  <img src="{{ page.hero_image }}" alt="">
+</div>
+{% endif %}
+
+<section class="hero{% if page.hero_image %} hero--below-banner{% endif %}">
   <p class="hero-sub">
     I should add a line or two about myself here, but for who?
   </p>

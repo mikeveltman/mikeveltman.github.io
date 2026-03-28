@@ -217,6 +217,22 @@ main { flex: 1; }
   &:hover { color: $white !important; text-decoration: none !important; }
 }
 
+// ── Hero banner (optional full-bleed photo above hero text) ──────────────
+
+.hero-banner {
+  width: 100%;
+  max-height: 48vh;
+  min-height: 260px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
 // ── Hero ─────────────────────────────────────────────
 
 .hero {
@@ -236,6 +252,9 @@ main { flex: 1; }
   }
 
   .hero-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+  // Reduce top padding when a banner image sits directly above
+  &--below-banner { padding-top: 3.5rem; }
 }
 
 // ── Section ──────────────────────────────────────────
@@ -401,6 +420,9 @@ main { flex: 1; }
     gap: 0.75rem;
     margin-top: 2.5rem;
   }
+
+  // Wide variant — listing pages (Projects, Blog) match the 940px homepage width
+  &--wide { max-width: 940px; }
 }
 
 // ── Blog post ─────────────────────────────────────────
@@ -677,6 +699,83 @@ main { flex: 1; }
     text-align: center;
     line-height: 1.3;
   }
+}
+
+// ── EXIF tooltip ──────────────────────────────────────
+
+.exif-tooltip {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: $white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 200;
+  white-space: nowrap;
+
+  &.is-visible { opacity: 1; }
+}
+
+// ── Vinyl grid ────────────────────────────────────────
+
+.vinyl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.vinyl-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 6px;
+    display: block;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  &:hover img {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  }
+
+  .vinyl-title {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.25;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .vinyl-artist {
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+}
+
+#vinyl-status {
+  color: var(--muted);
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  margin-top: 2rem;
 }
 
 // ── Touch devices: disable card hover blur ────────────

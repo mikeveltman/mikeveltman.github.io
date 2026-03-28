@@ -19,6 +19,7 @@ permalink: /blog/:title/
 
 plugins:
   - jekyll-last-modified-at
+  - jekyll-feed
 
 # ── Local development ─────────────────────────────────
 # Adds CORS headers so ColorThief.js can read images via Canvas locally
