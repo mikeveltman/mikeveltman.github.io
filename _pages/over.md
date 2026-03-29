@@ -17,3 +17,23 @@ Something more about me, should be here, but it's not (yet).
   <a href="https://github.com/mikeveltman" class="btn-outline btn" target="_blank" rel="noopener">{% include icon-github.html %} GitHub</a>
   <a href="https://letterboxd.com/fluxable" class="btn-outline btn" target="_blank" rel="noopener">{% include icon-letterboxd.html %} Letterboxd</a>
 </div>
+
+{% if site.data.goodreads %}
+<div class="reading-widget">
+  <span class="reading-widget__count">{{ site.data.goodreads.read_count }} book{% if site.data.goodreads.read_count != 1 %}s{% endif %} read in {{ site.data.goodreads.year }}</span>
+  {% if site.data.goodreads.currently_reading.size > 0 %}
+  <div class="reading-widget__current">
+    <span class="reading-widget__label">Currently reading</span>
+    {% for book in site.data.goodreads.currently_reading %}
+    <a href="{{ book.url }}" class="reading-widget__book" target="_blank" rel="noopener">
+      {% if book.cover %}<img src="{{ book.cover }}" alt="{{ book.title }}">{% endif %}
+      <span>
+        <strong>{{ book.title }}</strong>
+        {% if book.author %}<em>{{ book.author }}</em>{% endif %}
+      </span>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endif %}

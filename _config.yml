@@ -5,7 +5,7 @@ url: https://mikeveltman.nl
 baseurl: ''
 
 # Default Open Graph image for pages without a cover photo
-og_image: /assets/pantropica/green.jpeg
+og_image: /assets/photos/pantropica/green.jpeg
 
 # ── Build ─────────────────────────────────────────────
 include: ['_pages']   # _pages is not a default Jekyll collection dir, so must be listed

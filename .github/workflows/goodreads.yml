@@ -1,0 +1,32 @@
+name: Fetch Goodreads data
+
+on:
+  schedule:
+    - cron: '0 7 * * *'   # Daily at 07:00 UTC
+  workflow_dispatch:       # Run manually from the Actions tab
+
+permissions:
+  contents: write          # Needed to commit and push _data/goodreads.json
+
+jobs:
+  fetch-goodreads:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch Goodreads RSS
+        run: python3 .github/scripts/fetch_goodreads.py
+
+      - name: Commit if data changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add _data/goodreads.json
+          if git diff --cached --quiet; then
+            echo "No changes — skipping commit"
+          else
+            git commit -m "Update Goodreads data"
+            git push
+          fi
