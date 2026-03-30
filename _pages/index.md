@@ -8,7 +8,7 @@ permalink: /
 <section class="hero{% if page.hero_image %} hero--split{% endif %}">
   <div class="hero__text">
     <p class="hero-sub">
-      I should add a line or two about myself here, but for who?
+      [placeholder]
     </p>
     <div class="hero-links">
       <a href="/about" class="btn-outline btn">About me</a>
