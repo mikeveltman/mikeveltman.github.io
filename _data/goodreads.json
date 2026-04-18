@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "read_count": 10,
+  "read_count": 11,
   "currently_reading": [
     {
       "title": "Letters from a Stoic",
@@ -15,16 +15,16 @@
       "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1745430964l/222376640._SY475_.jpg",
       "url": "https://www.goodreads.com/review/show/8499312686?utm_medium=api&utm_source=rss",
       "read_at": ""
-    },
+    }
+  ],
+  "recent_reads": [
     {
       "title": "Why We Sleep: Unlocking the Power of Sleep and Dreams",
       "author": "Matthew Walker",
       "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1556604137l/34466963._SY475_.jpg",
       "url": "https://www.goodreads.com/review/show/8045683421?utm_medium=api&utm_source=rss",
-      "read_at": ""
-    }
-  ],
-  "recent_reads": [
+      "read_at": "Fri, 17 Apr 2026 00:00:00 +0000"
+    },
     {
       "title": "Project Hail Mary",
       "author": "Andy Weir",
@@ -59,13 +59,6 @@
       "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1564783201l/44492286.jpg",
       "url": "https://www.goodreads.com/review/show/8046697905?utm_medium=api&utm_source=rss",
       "read_at": "Sat, 21 Feb 2026 00:00:00 +0000"
-    },
-    {
-      "title": "Meta-mor-fosen",
-      "author": "Ellen Deckwitz",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1769690684l/247284975._SX318_.jpg",
-      "url": "https://www.goodreads.com/review/show/8331681942?utm_medium=api&utm_source=rss",
-      "read_at": "Fri, 13 Feb 2026 00:00:00 +0000"
     }
   ]
 }
