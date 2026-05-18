@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "read_count": 14,
+  "read_count": 15,
   "currently_reading": [
     {
       "title": "Pinkeltje en de gouden pen (Pinkeltje, #15)",
@@ -8,16 +8,16 @@
       "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1371829404l/18108032.jpg",
       "url": "https://www.goodreads.com/review/show/8600929087?utm_medium=api&utm_source=rss",
       "read_at": ""
-    },
+    }
+  ],
+  "recent_reads": [
     {
       "title": "Letters from a Stoic",
       "author": "Seneca",
       "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1421619214l/97411.jpg",
       "url": "https://www.goodreads.com/review/show/8046834286?utm_medium=api&utm_source=rss",
-      "read_at": ""
-    }
-  ],
-  "recent_reads": [
+      "read_at": "Sun, 17 May 2026 00:00:00 +0000"
+    },
     {
       "title": "The Cat in the Hat (Cat in the Hat, #1)",
       "author": "Dr. Seuss",
@@ -52,13 +52,6 @@
       "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1764703833l/54493401._SY475_.jpg",
       "url": "https://www.goodreads.com/review/show/8054741058?utm_medium=api&utm_source=rss",
       "read_at": "Fri, 27 Mar 2026 00:00:00 +0000"
-    },
-    {
-      "title": "God Emperor of Dune (Dune #4)",
-      "author": "Frank Herbert",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1564025916l/44439415._SY475_.jpg",
-      "url": "https://www.goodreads.com/review/show/8046697931?utm_medium=api&utm_source=rss",
-      "read_at": "Wed, 18 Mar 2026 00:00:00 +0000"
     }
   ]
 }
