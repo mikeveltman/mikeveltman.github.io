@@ -5,7 +5,7 @@ permalink: /
 # hero_image: /assets/photos/czech-republic/62A66506-A200-4235-8530-C810AEA94F81_1_105_c.jpeg
 ---
 
-<section class="hero{% if page.hero_image %} hero--split{% endif %}">
+<!-- <section class="hero{% if page.hero_image %} hero--split{% endif %}">
   <div class="hero__text">
     <p class="hero-sub">
       [placeholder]
@@ -19,7 +19,7 @@ permalink: /
     <img src="{{ page.hero_image }}" alt="">
   </div>
   {% endif %}
-</section>
+</section> -->
 
 {% if site.posts.size > 0 %}
 <section class="section">
@@ -42,7 +42,8 @@ permalink: /
 <section class="section">
   <p class="section__label">Projects</p>
   <div class="project-grid">
-    {% for project in site.projects limit:3 %}
+    {% assign recent_projects = site.projects | reverse %}
+    {% for project in recent_projects limit:3 %}
     <a href="{{ project.url }}" class="project-card">
       {% if project.cover %}
       <img class="card-cover" src="{{ project.cover }}" alt="{{ project.title }}">

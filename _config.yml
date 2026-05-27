@@ -38,6 +38,7 @@ collections:
   projects:
     output: true
     permalink: /projects/:slug/
+    sort_by: date
 
 # ── Layout defaults ───────────────────────────────────
 defaults:

@@ -10,8 +10,8 @@
 set -euo pipefail
 
 WATERMARK_TEXT="mikeveltman.nl"
-MAX_PX=2000          # longest edge
-QUALITY=78           # JPEG quality (78 is a good balance for web)
+MAX_PX=3000          # longest edge
+QUALITY=78          # JPEG quality (78 is a good balance for web)
 TARGET_DIR="${1:-assets/photos}"
 
 if ! command -v magick &>/dev/null && ! command -v convert &>/dev/null; then

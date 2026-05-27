@@ -51,6 +51,20 @@ layout: default
 
     {{ content }}
 
+    {% if page.photo_dir %}
+      {% assign gallery_prefix = "/assets/photos/" | append: page.photo_dir | append: "/" %}
+      <div class="photo-gallery">
+        {% for f in site.static_files %}
+          {% assign ext = f.extname | downcase %}
+          {% if f.path contains gallery_prefix %}
+            {% if ext == ".jpg" or ext == ".jpeg" or ext == ".png" or ext == ".webp" %}
+              <img src="{{ f.path }}" alt="">
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
   </div>
 
 </article>

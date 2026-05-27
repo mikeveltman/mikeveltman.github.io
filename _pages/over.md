@@ -4,7 +4,7 @@ title: About
 permalink: /about
 ---
 
-Something more about me, should be here, but it's not (yet).
+<!-- Something more about me, should be here, but it's not (yet). -->
 
 <p class="section__label" style="margin-top: 2.5rem; margin-bottom: 0.75rem;">Professionally</p>
 <div class="external-links" style="margin-top: 0;">

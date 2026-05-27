@@ -9,7 +9,8 @@ permalink: /projects
 
   {% if site.projects.size > 0 %}
   <div class="project-grid" style="margin-top: 2rem;">
-    {% for project in site.projects %}
+    {% assign sorted_projects = site.projects | reverse %}
+    {% for project in sorted_projects %}
     <a href="{{ project.url }}" class="project-card">
       {% if project.cover %}
       <img class="card-cover" src="{{ project.cover }}" alt="{{ project.title }}">
