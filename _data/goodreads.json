@@ -1,14 +1,7 @@
 {
   "year": 2026,
-  "read_count": 15,
+  "read_count": 16,
   "currently_reading": [
-    {
-      "title": "The Odyssey",
-      "author": "Homer",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1487351579l/34068470.jpg",
-      "url": "https://www.goodreads.com/review/show/8601579966?utm_medium=api&utm_source=rss",
-      "read_at": ""
-    },
     {
       "title": "Pinkeltje en de gouden pen (Pinkeltje, #15)",
       "author": "Dick Laan",
@@ -18,6 +11,13 @@
     }
   ],
   "recent_reads": [
+    {
+      "title": "The Odyssey",
+      "author": "Homer",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1487351579l/34068470.jpg",
+      "url": "https://www.goodreads.com/review/show/8601579966?utm_medium=api&utm_source=rss",
+      "read_at": "Fri, 19 Jun 2026 00:00:00 +0000"
+    },
     {
       "title": "Letters from a Stoic",
       "author": "Seneca",
@@ -52,13 +52,6 @@
       "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1745430964l/222376640._SY475_.jpg",
       "url": "https://www.goodreads.com/review/show/8499312686?utm_medium=api&utm_source=rss",
       "read_at": "Fri, 1 May 2026 00:00:00 +0000"
-    },
-    {
-      "title": "Project Hail Mary",
-      "author": "Andy Weir",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1764703833l/54493401._SY475_.jpg",
-      "url": "https://www.goodreads.com/review/show/8054741058?utm_medium=api&utm_source=rss",
-      "read_at": "Fri, 27 Mar 2026 00:00:00 +0000"
     }
   ]
 }
