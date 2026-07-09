@@ -14,6 +14,9 @@ WATERMARK_TEXT="mikeveltman.nl"
 MAX_PX=3000          # longest edge
 QUALITY=78          # JPEG quality (78 is a good balance for web)
 TARGET_DIR="${1:-assets/photos}"
+# EXIF marker written after processing; files that carry it are skipped,
+# so running the script twice never re-compresses or double-watermarks
+PROCESSED_MARKER="processed-for-mikeveltman.nl"
 
 if ! command -v magick &>/dev/null && ! command -v convert &>/dev/null; then
   echo "Error: ImageMagick not found. Install with: brew install imagemagick"
@@ -49,7 +52,12 @@ fi
 echo "Using font: $FONT"
 
 count=0
+skipped=0
 while IFS= read -r -d '' file; do
+  if [ "$(exiftool -s3 -UserComment "$file" 2>/dev/null)" = "$PROCESSED_MARKER" ]; then
+    skipped=$((skipped + 1))
+    continue
+  fi
   echo "Processing: $file"
   "$IM" "$file" \
     -auto-orient \
@@ -62,12 +70,14 @@ while IFS= read -r -d '' file; do
     -annotate +16+14 "$WATERMARK_TEXT" \
     "$file"
   # Strip private metadata (serials, artist, GPS) — lossless, keeps
-  # FNumber/ExposureTime/ISO/FocalLength for the EXIF tooltip on the site
+  # FNumber/ExposureTime/ISO/FocalLength for the EXIF tooltip on the site.
+  # Also writes the processed marker so a second run skips this file.
   exiftool -quiet -overwrite_original \
     -SerialNumber= -BodySerialNumber= -LensSerialNumber= \
     -InternalSerialNumber= -Artist= -IFD1:Artist= -gps:all= \
+    -UserComment="$PROCESSED_MARKER" \
     "$file"
   count=$((count + 1))
 done < <(find "$TARGET_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" \) -print0)
 
-echo "Done — processed $count photo(s)."
+echo "Done — processed $count photo(s), skipped $skipped already-processed."

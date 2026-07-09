@@ -729,6 +729,29 @@ main { flex: 1; }
     padding: 0.25rem;
     &:hover { color: $white; }
   }
+
+  &__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 3rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 1rem 0.75rem;
+    user-select: none;
+    z-index: 1;
+    &:hover { color: $white; }
+    &--prev { left: 0.5rem; }
+    &--next { right: 0.5rem; }
+
+    @media (max-width: 640px) {
+      font-size: 2.25rem;
+      padding: 0.75rem 0.5rem;
+    }
+  }
 }
 
 // ── Polaroid display ──────────────────────────────────

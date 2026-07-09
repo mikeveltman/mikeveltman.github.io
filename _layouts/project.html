@@ -58,7 +58,7 @@ layout: default
           {% assign ext = f.extname | downcase %}
           {% if f.path contains gallery_prefix %}
             {% if ext == ".jpg" or ext == ".jpeg" or ext == ".png" or ext == ".webp" %}
-              <img src="{{ f.path }}" alt="">
+              <img src="{{ f.path }}" alt="" loading="lazy" decoding="async">
             {% endif %}
           {% endif %}
         {% endfor %}
@@ -72,7 +72,9 @@ layout: default
 <!-- Lightbox overlay -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
   <button class="lightbox__close" id="lightbox-close" aria-label="Close">&#x2715;</button>
+  <button class="lightbox__nav lightbox__nav--prev" id="lightbox-prev" aria-label="Previous photo">&#x2039;</button>
   <img class="lightbox__img" id="lightbox-img" src="" alt="">
+  <button class="lightbox__nav lightbox__nav--next" id="lightbox-next" aria-label="Next photo">&#x203a;</button>
   <div class="lightbox__exif" id="lightbox-exif"></div>
 </div>
 
