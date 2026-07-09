@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-# process-photos.sh — compress and watermark all JPEGs in assets/photos/
+# process-photos.sh — compress, watermark and strip private EXIF from all JPEGs
+# in assets/photos/
 #
 # Usage:
 #   ./process-photos.sh              # process all photos
 #   ./process-photos.sh assets/photos/zwolle   # process one folder
 #
-# Requires ImageMagick: brew install imagemagick
+# Requires ImageMagick + exiftool: brew install imagemagick exiftool
 
 set -euo pipefail
 
@@ -16,6 +17,11 @@ TARGET_DIR="${1:-assets/photos}"
 
 if ! command -v magick &>/dev/null && ! command -v convert &>/dev/null; then
   echo "Error: ImageMagick not found. Install with: brew install imagemagick"
+  exit 1
+fi
+
+if ! command -v exiftool &>/dev/null; then
+  echo "Error: exiftool not found. Install with: brew install exiftool"
   exit 1
 fi
 
@@ -54,6 +60,12 @@ while IFS= read -r -d '' file; do
     -font "$FONT" \
     -pointsize 20 \
     -annotate +16+14 "$WATERMARK_TEXT" \
+    "$file"
+  # Strip private metadata (serials, artist, GPS) — lossless, keeps
+  # FNumber/ExposureTime/ISO/FocalLength for the EXIF tooltip on the site
+  exiftool -quiet -overwrite_original \
+    -SerialNumber= -BodySerialNumber= -LensSerialNumber= \
+    -InternalSerialNumber= -Artist= -IFD1:Artist= -gps:all= \
     "$file"
   count=$((count + 1))
 done < <(find "$TARGET_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" \) -print0)

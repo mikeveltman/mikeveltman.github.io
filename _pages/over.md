@@ -25,11 +25,11 @@ permalink: /about
   <div class="reading-widget__current">
     <span class="reading-widget__label">Currently reading</span>
     {% for book in site.data.goodreads.currently_reading %}
-    <a href="{{ book.url }}" class="reading-widget__book" target="_blank" rel="noopener">
-      {% if book.cover %}<img src="{{ book.cover }}" alt="{{ book.title }}">{% endif %}
+    <a href="{{ book.url | escape }}" class="reading-widget__book" target="_blank" rel="noopener">
+      {% if book.cover %}<img src="{{ book.cover | escape }}" alt="{{ book.title | escape }}">{% endif %}
       <span>
-        <strong>{{ book.title }}</strong>
-        {% if book.author %}<em>{{ book.author }}</em>{% endif %}
+        <strong>{{ book.title | escape }}</strong>
+        {% if book.author %}<em>{{ book.author | escape }}</em>{% endif %}
       </span>
     </a>
     {% endfor %}

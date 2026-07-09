@@ -17,6 +17,11 @@ def fetch(url):
         return r.read()
 
 
+def safe_url(url):
+    """Only accept https URLs — anything else (javascript:, data:, …) is dropped."""
+    return url if url.startswith("https://") else ""
+
+
 def parse_books(xml_bytes):
     xml_str = xml_bytes.decode("utf-8")
     root = ET.fromstring(xml_str)
@@ -44,8 +49,8 @@ def parse_books(xml_bytes):
         books.append({
             "title": raw_title,
             "author": author,
-            "cover": cover,
-            "url": g("link") or g("guid"),
+            "cover": safe_url(cover),
+            "url": safe_url(g("link") or g("guid")),
             "read_at": g("user_read_at"),
         })
 
