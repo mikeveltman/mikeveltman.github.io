@@ -1,7 +1,15 @@
 {
   "year": 2026,
   "read_count": 25,
-  "currently_reading": [],
+  "currently_reading": [
+    {
+      "title": "Crime and Punishment",
+      "author": "Fyodor Dostoevsky",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1382846449l/7144.jpg",
+      "url": "https://www.goodreads.com/review/show/8045695464?utm_medium=api&utm_source=rss",
+      "read_at": ""
+    }
+  ],
   "recent_reads": [
     {
       "title": "The Phoenix Project: A Novel About IT, DevOps, and Helping Your Business Win",
