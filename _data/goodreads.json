@@ -1,19 +1,12 @@
 {
   "year": 2026,
-  "read_count": 27,
+  "read_count": 28,
   "currently_reading": [
     {
       "title": "Piranesi",
       "author": "Susanna Clarke",
       "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1773750050l/50202953._SY475_.jpg",
       "url": "https://www.goodreads.com/review/show/8758014262?utm_medium=api&utm_source=rss",
-      "read_at": ""
-    },
-    {
-      "title": "Morele revolutie: De BBC Reith-lezingen",
-      "author": "Rutger Bregman",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1770475412l/247709012._SY475_.jpg",
-      "url": "https://www.goodreads.com/review/show/8547534076?utm_medium=api&utm_source=rss",
       "read_at": ""
     },
     {
@@ -32,6 +25,13 @@
     }
   ],
   "recent_reads": [
+    {
+      "title": "Morele revolutie: De BBC Reith-lezingen",
+      "author": "Rutger Bregman",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1770475412l/247709012._SY475_.jpg",
+      "url": "https://www.goodreads.com/review/show/8547534076?utm_medium=api&utm_source=rss",
+      "read_at": "Sun, 6 Sep 2026 00:00:00 +0000"
+    },
     {
       "title": "Blindsight (Firefall, #1)",
       "author": "Peter Watts",
@@ -66,13 +66,6 @@
       "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1745635860l/232026855._SX318_.jpg",
       "url": "https://www.goodreads.com/review/show/8815993212?utm_medium=api&utm_source=rss",
       "read_at": "Sun, 2 Aug 2026 00:00:00 +0000"
-    },
-    {
-      "title": "The Little Book That Still Beats the Market (Little Books. Big Profits)",
-      "author": "Joel Greenblatt",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1348120206l/8247775.jpg",
-      "url": "https://www.goodreads.com/review/show/8264019049?utm_medium=api&utm_source=rss",
-      "read_at": "Mon, 27 Jul 2026 00:00:00 +0000"
     }
   ]
 }
