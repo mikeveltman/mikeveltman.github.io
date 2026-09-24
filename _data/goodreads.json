@@ -1,19 +1,19 @@
 {
   "year": 2026,
-  "read_count": 31,
+  "read_count": 32,
   "currently_reading": [
+    {
+      "title": "The Housemaid (The Housemaid, #1)",
+      "author": "Freida McFadden",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1646534743l/60556912._SY475_.jpg",
+      "url": "https://www.goodreads.com/review/show/8968553064?utm_medium=api&utm_source=rss",
+      "read_at": ""
+    },
     {
       "title": "Ultiem Japan: 100 hoogtepunten voor de reis van je leven",
       "author": "Rebecca Hallett",
       "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1766786042l/245810212._SX318_.jpg",
       "url": "https://www.goodreads.com/review/show/8795409042?utm_medium=api&utm_source=rss",
-      "read_at": ""
-    },
-    {
-      "title": "The Reverse Centaur's Guide to Life After AI",
-      "author": "Cory Doctorow",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1772829981l/245645195._SY475_.jpg",
-      "url": "https://www.goodreads.com/review/show/8893307857?utm_medium=api&utm_source=rss",
       "read_at": ""
     },
     {
@@ -25,6 +25,13 @@
     }
   ],
   "recent_reads": [
+    {
+      "title": "The Reverse Centaur's Guide to Life After AI",
+      "author": "Cory Doctorow",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1772829981l/245645195._SY475_.jpg",
+      "url": "https://www.goodreads.com/review/show/8893307857?utm_medium=api&utm_source=rss",
+      "read_at": "Thu, 24 Sep 2026 00:00:00 +0000"
+    },
     {
       "title": "The Alchemist",
       "author": "Paulo Coelho",
@@ -59,13 +66,6 @@
       "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1386924412l/48484.jpg",
       "url": "https://www.goodreads.com/review/show/8583408704?utm_medium=api&utm_source=rss",
       "read_at": "Wed, 2 Sep 2026 00:00:00 +0000"
-    },
-    {
-      "title": "Recursion",
-      "author": "Blake Crouch",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1750526564l/42046112._SX318_.jpg",
-      "url": "https://www.goodreads.com/review/show/8758004826?utm_medium=api&utm_source=rss",
-      "read_at": "Fri, 21 Aug 2026 00:00:00 +0000"
     }
   ]
 }
