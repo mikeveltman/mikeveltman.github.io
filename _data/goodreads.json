@@ -1,64 +1,6 @@
 {
   "year": 2026,
-  "read_count": 35,
-  "currently_reading": [
-    {
-      "title": "Ultiem Japan: 100 hoogtepunten voor de reis van je leven",
-      "author": "Rebecca Hallett",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1766786042l/245810212._SX318_.jpg",
-      "url": "https://www.goodreads.com/review/show/8795409042?utm_medium=api&utm_source=rss",
-      "read_at": ""
-    },
-    {
-      "title": "Crime and Punishment",
-      "author": "Fyodor Dostoevsky",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1382846449l/7144.jpg",
-      "url": "https://www.goodreads.com/review/show/8045695464?utm_medium=api&utm_source=rss",
-      "read_at": ""
-    }
-  ],
-  "recent_reads": [
-    {
-      "title": "Thinking, Fast and Slow",
-      "author": "Daniel Kahneman",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1317793965l/11468377.jpg",
-      "url": "https://www.goodreads.com/review/show/8046833831?utm_medium=api&utm_source=rss",
-      "read_at": "Mon, 26 Oct 2026 00:00:00 +0000"
-    },
-    {
-      "title": "How To Hold a Cockroach: A book for those who are free and don't know it",
-      "author": "Matthew  Maxwell",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1588027962l/53279827.jpg",
-      "url": "https://www.goodreads.com/review/show/9057469397?utm_medium=api&utm_source=rss",
-      "read_at": "Mon, 26 Oct 2026 00:00:00 +0000"
-    },
-    {
-      "title": "The Housemaid (The Housemaid, #1)",
-      "author": "Freida McFadden",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1646534743l/60556912._SY475_.jpg",
-      "url": "https://www.goodreads.com/review/show/8968553064?utm_medium=api&utm_source=rss",
-      "read_at": "Sun, 27 Sep 2026 00:00:00 +0000"
-    },
-    {
-      "title": "The Reverse Centaur's Guide to Life After AI",
-      "author": "Cory Doctorow",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1772829981l/245645195._SY475_.jpg",
-      "url": "https://www.goodreads.com/review/show/8893307857?utm_medium=api&utm_source=rss",
-      "read_at": "Thu, 24 Sep 2026 00:00:00 +0000"
-    },
-    {
-      "title": "The Alchemist",
-      "author": "Paulo Coelho",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1654371463l/18144590._SY475_.jpg",
-      "url": "https://www.goodreads.com/review/show/8045678347?utm_medium=api&utm_source=rss",
-      "read_at": "Tue, 22 Sep 2026 00:00:00 +0000"
-    },
-    {
-      "title": "Meneertje: Het relaas van een uitzonderlijke kat",
-      "author": "Sanne Vogel",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1720446015l/216223603._SY475_.jpg",
-      "url": "https://www.goodreads.com/review/show/8898615446?utm_medium=api&utm_source=rss",
-      "read_at": "Tue, 15 Sep 2026 00:00:00 +0000"
-    }
-  ]
+  "read_count": 0,
+  "currently_reading": [],
+  "recent_reads": []
 }
